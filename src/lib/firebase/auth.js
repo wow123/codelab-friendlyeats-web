@@ -1,7 +1,7 @@
 import {
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithEmailAndPassword,
+  signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
   onAuthStateChanged as _onAuthStateChanged,
   onIdTokenChanged as _onIdTokenChanged,
 } from "firebase/auth";
@@ -26,19 +26,16 @@ export async function signInWithGoogle() {
   }
 }
 
-export function signInWithEmailAndPassword() {
-  const email = "wowbies@gmail.com"
-  const password = "abcd1234"
+export async function signInWithEmailAndPassword(email = "wowbies@gmail.com", password = "abcd1234") {
   try {
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log("Signed in user:", user);
-    }
-
+    const userCredential = await firebaseSignInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("Signed in user:", user);
+    return userCredential;
   } catch (error) {
     console.error("Error signing in with email and password", error);
     console.error(error.code + ": " + error.message);
+    throw error;
   }
 }
 
