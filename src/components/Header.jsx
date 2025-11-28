@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import {
   signInWithGoogle,
+  signInWithEmailAndPassword,
   signOut,
   onIdTokenChanged,
 } from "@/src/lib/firebase/auth.js";
@@ -39,6 +40,11 @@ export default function Header({ initialUser }) {
   const handleSignIn = (event) => {
     event.preventDefault();
     signInWithGoogle();
+  };
+
+  const handleSignInEmail = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword();
   };
 
   return (
@@ -83,7 +89,11 @@ export default function Header({ initialUser }) {
         <div className="profile">
           <a href="#" onClick={handleSignIn}>
             <img src="/profile.svg" alt="A placeholder user image" />
-            Sign In with Google
+            Sign In with Google     
+          </a>
+          <a href="#" onClick={handleSignInEmail}>
+            <img src="/profile.svg" />
+            Sign In with Email
           </a>
         </div>
       )}
