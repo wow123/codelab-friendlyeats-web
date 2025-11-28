@@ -26,13 +26,19 @@ export async function signInWithGoogle() {
   }
 }
 
-export async function signInWithEmailAndPassword() {
+export function signInWithEmailAndPassword() {
   const email = "wowbies@gmail.com"
   const password = "abcd1234"
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("Signed in user:", user);
+    }
+
   } catch (error) {
     console.error("Error signing in with email and password", error);
+    console.error(error.code + ": " + error.message);
   }
 }
 
