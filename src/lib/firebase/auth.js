@@ -2,6 +2,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword as firebaseSignInWithEmailAndPassword,
+  sendPasswordResetEmail as firebaseSendPasswordResetEmail,
   onAuthStateChanged as _onAuthStateChanged,
   onIdTokenChanged as _onIdTokenChanged,
 } from "firebase/auth";
@@ -35,6 +36,15 @@ export async function signInWithEmailAndPassword(email = "wowbies@gmail.com", pa
   } catch (error) {
     console.error("Error signing in with email and password", error);
     console.error(error.code + ": " + error.message);
+    throw error;
+  }
+}
+
+export async function sendPasswordResetEmail(email) {
+  try {
+    return await firebaseSendPasswordResetEmail(auth, email);
+  } catch (error) {
+    console.error("Error sending password reset email", error);
     throw error;
   }
 }

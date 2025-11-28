@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   signInWithGoogle,
@@ -7,6 +7,7 @@ import {
   signOut,
   onIdTokenChanged,
 } from "@/src/lib/firebase/auth.js";
+import SignInModal from "@/src/components/SignInModal.jsx";
 import { addFakeRestaurantsAndReviews } from "@/src/lib/firebase/firestore.js";
 import { setCookie, deleteCookie } from "cookies-next";
 
@@ -44,8 +45,10 @@ export default function Header({ initialUser }) {
 
   const handleSignInEmail = (event) => {
     event.preventDefault();
-    signInWithEmailAndPassword();
+    setModalOpen(true);
   };
+
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <header>
@@ -92,9 +95,10 @@ export default function Header({ initialUser }) {
             Sign In with Google     
           </a>
           <a href="#" onClick={handleSignInEmail}>
-            <img src="/profile.svg" />
+            <img src="/Email-signin.svg" />
             Sign In with Email
           </a>
+          <SignInModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </div>
       )}
     </header>
