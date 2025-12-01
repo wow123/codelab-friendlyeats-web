@@ -104,6 +104,7 @@ const overlayStyle = {
 };
 
 const modalStyle = {
+  color: "#000",
   background: "#fff",
   padding: 24,
   borderRadius: 8,
@@ -111,7 +112,12 @@ const modalStyle = {
   boxShadow: "0 6px 18px rgba(0,0,0,0.2)",
 };
 
-const fieldStyle = { marginBottom: 12, display: "flex", flexDirection: "column" };
+const fieldStyle = {
+  marginBottom: 12, 
+  display: "flex", 
+  flexDirection: "column" 
+};
+
 const buttonStyle = { padding: "8px 12px", marginRight: 8 };
 const cancelButtonStyle = { padding: "8px 12px", background: "transparent", border: "1px solid #ccc" };
 const linkStyle = { color: "#06c", textDecoration: "underline", cursor: "pointer" };
